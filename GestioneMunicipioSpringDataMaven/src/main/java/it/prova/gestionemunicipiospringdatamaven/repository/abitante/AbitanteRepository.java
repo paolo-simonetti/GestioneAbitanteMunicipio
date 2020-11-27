@@ -32,4 +32,6 @@ public interface AbitanteRepository extends CrudRepository<Abitante, Long>,Query
 	@EntityGraph(attributePaths = { "municipio" })
 	List <Abitante> findByCognome(String cognome);
 
+	@Query("from Abitante a join fetch a.municipio m where a.id = ?1")
+	Abitante findByIdWithMunicipio(Long id);
 }

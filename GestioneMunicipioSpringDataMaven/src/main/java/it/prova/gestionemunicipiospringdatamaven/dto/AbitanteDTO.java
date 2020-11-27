@@ -4,30 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import it.prova.gestionemunicipiospringdatamaven.model.Abitante;
-import it.prova.gestionemunicipiospringdatamaven.service.municipio.MunicipioService;
+
 
 public class AbitanteDTO implements AbstractDTO<Abitante,AbitanteDTO> {
 
-	private String id;
+	private Long id;
 	private String nome;
 	private String cognome;
 	private String eta;
 	private String residenza;
 	private String idMunicipio;
 	
-	@Autowired
-	private static MunicipioService municipioService;
 	
-	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -95,18 +90,19 @@ public class AbitanteDTO implements AbstractDTO<Abitante,AbitanteDTO> {
 	}
 	
 	@Override
-	public String errorId() {
+	public String errorId(String id) {
 		String result=null;
-		if(StringUtils.isBlank(this.id)) {
+		if(StringUtils.isBlank(id)) {
 			result="Il campo id non può essere vuoto";
 		}  else {
 			try {
-				Integer.parseInt(this.id);
+				this.id=Long.parseLong(id);
 			} catch(NumberFormatException e) {
 				e.printStackTrace();
 				result ="Id inserito non valido";
 			}
 		}
+		
 		return result;
 	}
 
@@ -131,8 +127,6 @@ public class AbitanteDTO implements AbstractDTO<Abitante,AbitanteDTO> {
 			result.add("Il campo residenza non può essere vuoto");
 		if(StringUtils.isBlank(this.idMunicipio)) {
 			result.add("Il campo municipio non può essere vuoto");			
-		} else if(municipioService.caricaSingoloMunicipio(Long.parseLong(this.eta))==null) {
-			result.add("Municipio non esistente");
 		} else {
 			try {
 				Long.parseLong(this.idMunicipio);
@@ -148,13 +142,11 @@ public class AbitanteDTO implements AbstractDTO<Abitante,AbitanteDTO> {
 	@Override
 	public Abitante buildModelFromDTO(AbitanteDTO abitanteDTO) {
 		Abitante result = new Abitante();
-		result.setId(Long.parseLong(abitanteDTO.getId()));
+		result.setId(abitanteDTO.getId());
 		result.setNome(abitanteDTO.getNome());
 		result.setCognome(abitanteDTO.getCognome());
 		result.setEta(Integer.parseInt(abitanteDTO.getEta()));
-		result.setResidenza(abitanteDTO.getResidenza());
-		result.setMunicipio(municipioService.caricaSingoloMunicipio(Long.parseLong(abitanteDTO.getId())));
-		
+		result.setResidenza(abitanteDTO.getResidenza());		
 		return result;
 	}
 	
@@ -162,7 +154,7 @@ public class AbitanteDTO implements AbstractDTO<Abitante,AbitanteDTO> {
 	@Override
 	public AbitanteDTO buildDTOFromModel(Abitante abitante) {
 		AbitanteDTO result=new AbitanteDTO();
-		result.setId(abitante.getId().toString());
+		result.setId(abitante.getId());
 		result.setNome(abitante.getNome());
 		result.setCognome(abitante.getCognome());
 		result.setEta(abitante.getEta().toString());

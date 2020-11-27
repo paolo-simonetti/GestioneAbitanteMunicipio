@@ -5,7 +5,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Inserisci Nuovo Abitante</title>
+<title>Aggiorna Abitante</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/jqueryUI/jquery-ui.min.css" />
 <style>
@@ -29,37 +29,37 @@
 	</div>
 
 		<div class="page-header">
-			<h3>Pagina di Inserimento Abitante</h3>
+			<h3>Pagina di Aggiornamento Abitante</h3>
 		</div>
 
-		<form class="form-horizontal" action="ExecuteInsertAbitanteServlet"
+		<form class="form-horizontal" action="ExecuteUpdateAbitanteServlet"
 			method="post">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="text" id="nomeInputId"
-						name="nomeInput">
+						name="nomeInput" value="${requestScope.abitanteDaAggiornare.nome}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="cognomeInputId">Cognome:</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="text" id="cognomeInputId"
-						name="cognomeInput">
+						name="cognomeInput" value="${requestScope.abitanteDaAggiornare.cognome}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="etaInputId">Eta:</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="text" id="etaInputId"
-						name="etaInput">
+						name="etaInput" value="${requestScope.abitanteDaAggiornare.eta}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="residenzaInputId">Residenza:</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="text" id="residenzaInputId"
-						name="residenzaInput">
+						name="residenzaInput" value="${requestScope.abitanteDaAggiornare.residenza}">
 				</div>
 			</div>
 
@@ -67,8 +67,8 @@
 				<label class="control-label col-sm-2" for="municipioInputId">Municipio:</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="text" id="municipioInputId"
-						name="municipioInput">
-					<input type="hidden" name="municipioId" id="municipioId">
+						name="municipioInput" value="${requestScope.abitanteDaAggiornare.municipio.descrizione}">
+					<input type="hidden" name="municipioId" id="municipioId" value="${requestScope.abitanteDaAggiornare.municipio.id}">
 				</div>
 			</div>
 
@@ -76,7 +76,7 @@
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-primary btn-md">Effetua
-						Inserimento</button>
+						Aggiornamento</button>
 				</div>
 			</div>
 			

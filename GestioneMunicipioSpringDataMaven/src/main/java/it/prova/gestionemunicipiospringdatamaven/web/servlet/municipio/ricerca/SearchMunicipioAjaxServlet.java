@@ -1,8 +1,8 @@
-package it.prova.gestionemunicipiospringdatamaven.web.servlet.municipio;
+package it.prova.gestionemunicipiospringdatamaven.web.servlet.municipio.ricerca;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import it.prova.gestionemunicipiospringdatamaven.model.Municipio;
 import it.prova.gestionemunicipiospringdatamaven.service.municipio.MunicipioService;
 
-@WebServlet("/ExecuteSearchMunicipioServlet")
-public class ExecuteSearchMunicipioServlet extends HttpServlet {
+@WebServlet("/SearchMunicipioAjaxServlet")
+public class SearchMunicipioAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -29,27 +33,37 @@ public class ExecuteSearchMunicipioServlet extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
-	public ExecuteSearchMunicipioServlet() {
+	public SearchMunicipioAjaxServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		String term = request.getParameter("term");
+
+		List<Municipio> listaMunicipiByTerm = municipioService.cercaByDescrizioneILike(term);
+		String json = buildJsonResponse(listaMunicipiByTerm);
+		response.getWriter().write(json);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+	}
 
-		String descrizioneInput = request.getParameter("descrizioneInput");
-		String codiceInput = request.getParameter("codiceInput");
-		String ubicazioneInput = request.getParameter("ubicazioneInput");
+	private String buildJsonResponse(List<Municipio> listaMunicipi) {
+		JsonArray ja = new JsonArray();
 
-		request.setAttribute("listaMunicipi",
-				municipioService.findByExample(new Municipio(descrizioneInput, codiceInput, ubicazioneInput)));
+		for (Municipio municipioElement : listaMunicipi) {
+			JsonObject jo = new JsonObject();
+			jo.addProperty("value", municipioElement.getId());
+			jo.addProperty("label", municipioElement.getDescrizione());
+			ja.add(jo);
+		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("/municipio/results.jsp");
-		rd.forward(request, response);
+		return new Gson().toJson(ja);
 	}
 
 }

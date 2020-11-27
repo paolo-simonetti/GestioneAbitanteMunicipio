@@ -9,7 +9,7 @@ public interface MunicipioService {
 	public List<Municipio> listAllMunicipi() ;
 
 	public Municipio caricaSingoloMunicipio(Long id);
-
+	
 	public void aggiorna(Municipio municipioInstance);
 
 	public void inserisciNuovo(Municipio municipioInstance);
@@ -20,4 +20,11 @@ public interface MunicipioService {
 	
 	public List<Municipio> cercaByDescrizioneILike(String term);
 
+	public List<Municipio> cercaByUbicazioneIniziaCon(String term);
+	
+	public List<Municipio> cercaByCodiceAndUbicazione(String codice, String ubicazione);
+	
+	public List<Municipio> cercaByCodiceOrdinandoAlfabeticamentePer(String codice);
+	
+	public List<Municipio> cercaByAbitanti_CognomeLike(String cognome);
 }

@@ -17,6 +17,11 @@
 		<div class="page-header">
 			<h3>Pagina dei Risultati</h3>
 		</div>
+		
+			<%-- alert conferma --%>
+		<div class="alert alert-success ${messaggioConferma!=null?'':'d-none' }" role="alert">
+			${messaggioConferma }
+		</div>
 
 		<table class="table table-striped">
 			<thead>
@@ -36,11 +41,14 @@
 						<td>${abitanteItem.cognome }</td>
 						<td>${abitanteItem.eta }</td>
 						<td>${abitanteItem.residenza }</td>
-						<td><a
-							href="ExecuteDettaglioAbitanteServlet?idMunicipio=${abitanteItem.id }"
-							class="btn btn-info">Dettaglio</a> <a
-							href="PrepareModificaAbitanteServlet?idMunicipio=${abitanteItem.id }"
-							class="btn btn-info">Modifica</a></td>
+						<td>
+							<a href="GetAbitanteServlet?idAbitante=${abitanteItem.id }"
+							class="btn btn-info">Dettaglio</a> 
+							<a href="PrepareUpdateAbitanteServlet?idAbitante=${abitanteItem.id }"
+							class="btn btn-info">Modifica</a>
+							<a href="PrepareDeleteAbitanteServlet?idAbitante=${abitanteItem.id }"
+							class="btn btn-info">Elimina</a>
+						</td>
 					</tr>
 				</c:forEach>
 

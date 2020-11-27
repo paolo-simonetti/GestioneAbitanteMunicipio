@@ -1,4 +1,4 @@
-package it.prova.gestionemunicipiospringdatamaven.web.servlet.abitante;
+package it.prova.gestionemunicipiospringdatamaven.web.servlet.abitante.test;
 
 import java.io.IOException;
 

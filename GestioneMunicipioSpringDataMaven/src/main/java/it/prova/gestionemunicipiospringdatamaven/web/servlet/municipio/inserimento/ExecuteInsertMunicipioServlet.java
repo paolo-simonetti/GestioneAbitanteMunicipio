@@ -1,4 +1,4 @@
-package it.prova.gestionemunicipiospringdatamaven.web.servlet.municipio;
+package it.prova.gestionemunicipiospringdatamaven.web.servlet.municipio.inserimento;
 
 import java.io.IOException;
 import java.util.List;
@@ -46,7 +46,7 @@ public class ExecuteInsertMunicipioServlet extends HttpServlet {
 		String ubicazioneInput = request.getParameter("ubicazione");
 		MunicipioDTO municipioDTO = new MunicipioDTO(descrizioneInput, codiceInput, ubicazioneInput);
 		
-		//effettuoi la validazione dell'input e se non va bene rimando in pagina
+		//effettuo la validazione dell'input e se non va bene rimando in pagina
 		List<String> municipioErrors = municipioDTO.errors();
 		if (!municipioErrors.isEmpty()) {
 			request.setAttribute("municipioAttribute", municipioDTO);

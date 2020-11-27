@@ -1,4 +1,4 @@
-package it.prova.gestionemunicipiospringdatamaven.web.servlet.abitante;
+package it.prova.gestionemunicipiospringdatamaven.web.servlet.municipio.test;
 
 import java.io.IOException;
 
@@ -9,20 +9,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/PrepareTestSpringDataAbitanteServlet")
-public class PrepareTestSpringDataAbitanteServlet extends HttpServlet {
+
+@WebServlet("/PrepareTestSpringDataMunicipioServlet")
+public class PrepareTestSpringDataMunicipioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PrepareTestSpringDataAbitanteServlet() {
+  
+    public PrepareTestSpringDataMunicipioServlet() {
         super();
     }
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/abitante/testSpringData.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/municipio/testSpringData.jsp");
 		rd.forward(request, response);
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

@@ -56,4 +56,23 @@ public class MunicipioServiceImpl implements MunicipioService {
 		return municipioRepository.findAllByDescrizioneContaining(term);
 	}
 
+	@Transactional(readOnly=true) 
+	public List<Municipio> cercaByUbicazioneIniziaCon(String term) {
+		return municipioRepository.findAllByUbicazioneStartingWith(term);
+	}
+	
+	@Transactional(readOnly=true) 
+	public List<Municipio> cercaByCodiceAndUbicazione(String codice, String ubicazione) {
+		return municipioRepository.findAllByCodiceAndUbicazione(codice,ubicazione);
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Municipio> cercaByCodiceOrdinandoAlfabeticamentePer(String codice) {
+		return municipioRepository.findAllByCodiceOrderByUbicazioneDesc(codice);
+	}
+	
+	@Transactional(readOnly=true) 
+	public List<Municipio> cercaByAbitanti_CognomeLike(String cognome) {
+		return municipioRepository.findAllByAbitanti_CognomeLike(cognome);
+	}
 }

@@ -37,6 +37,11 @@ public class AbitanteServiceImpl implements AbitanteService {
 		return abitanteRepository.findById(id).orElse(null);
 
 	}
+	
+	@Transactional(readOnly = true)
+	public Abitante caricaSingoloAbitanteConMunicipio(Long id) {
+		return abitanteRepository.findByIdWithMunicipio(id);
+	}
 
 	@Transactional
 	public void aggiorna(Abitante abitanteInstance) {

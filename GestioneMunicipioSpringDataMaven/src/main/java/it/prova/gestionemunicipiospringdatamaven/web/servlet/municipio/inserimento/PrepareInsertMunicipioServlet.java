@@ -1,4 +1,4 @@
-package it.prova.gestionemunicipiospringdatamaven.web.servlet.municipio;
+package it.prova.gestionemunicipiospringdatamaven.web.servlet.municipio.inserimento;
 
 import java.io.IOException;
 

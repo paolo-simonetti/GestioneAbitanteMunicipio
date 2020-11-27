@@ -72,4 +72,40 @@ public class Municipio  {
 		this.ubicazione = ubicazione;
 	}
 
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Municipio other = (Municipio) obj;
+		if (codice == null) {
+			if (other.codice != null)
+				return false;
+		} else if (!codice.equals(other.codice))
+			return false;
+		if (descrizione == null) {
+			if (other.descrizione != null)
+				return false;
+		} else if (!descrizione.equals(other.descrizione))
+			return false;
+		if (ubicazione == null) {
+			if (other.ubicazione != null)
+				return false;
+		} else if (!ubicazione.equals(other.ubicazione))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Municipio [id=" + id + ", descrizione=" + descrizione + ", codice=" + codice + ", ubicazione="
+				+ ubicazione + "]";
+	}
+
+	
+	
 }

@@ -10,7 +10,7 @@ import it.prova.gestionemunicipiospringdatamaven.model.Municipio;
 
 public class MunicipioDTO {
 
-	private String id;
+	private Long id;
 	private String descrizione;
 	private String codice;
 	private String ubicazione;
@@ -24,11 +24,11 @@ public class MunicipioDTO {
 		this.ubicazione = ubicazione;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -56,13 +56,13 @@ public class MunicipioDTO {
 		this.ubicazione = ubicazione;
 	}
 	
-	public String errorId() {
+	public String errorId(String id) {
 		String result=null;
-		if(StringUtils.isBlank(this.id)) {
+		if(StringUtils.isBlank(id)) {
 			result="Il campo id non può essere vuoto";
 		}  else {
 			try {
-				Integer.parseInt(this.id);
+				this.id=Long.parseLong(id);
 			} catch(NumberFormatException e) {
 				e.printStackTrace();
 				result ="Id inserito non valido";
@@ -86,7 +86,8 @@ public class MunicipioDTO {
 
 	public static Municipio buildModelFromDto(MunicipioDTO municipioDTO) {
 		Municipio result = new Municipio();
-		result.setId(Long.parseLong(municipioDTO.getId()));
+		
+		result.setId(municipioDTO.getId());
 		result.setDescrizione(municipioDTO.getDescrizione());
 		result.setCodice(municipioDTO.getCodice());
 		result.setUbicazione(municipioDTO.getUbicazione());
@@ -95,7 +96,7 @@ public class MunicipioDTO {
 	
 	public static MunicipioDTO buildDTOFromModel(Municipio municipio) {
 		MunicipioDTO result=new MunicipioDTO();
-		result.setId(municipio.getId().toString());
+		result.setId(municipio.getId());
 		result.setDescrizione(municipio.getDescrizione());
 		result.setCodice(municipio.getCodice());
 		result.setUbicazione(municipio.getUbicazione());

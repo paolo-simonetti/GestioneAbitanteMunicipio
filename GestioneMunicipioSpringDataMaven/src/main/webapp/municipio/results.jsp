@@ -22,6 +22,7 @@
 		<div class="alert alert-success ${messaggioConferma!=null?'':'d-none' }" role="alert">
 			${messaggioConferma }
 		</div>
+		
 
 		<table class="table table-striped">
 			<thead>
@@ -40,11 +41,15 @@
 						<td>${municipioItem.descrizione }</td>
 						<td>${municipioItem.codice }</td>
 						<td>${municipioItem.ubicazione }</td>
-						<td><a
-							href="ExecuteDettaglioMunicipioServlet?idMunicipio=${municipioItem.id }"
-							class="btn btn-info">Dettaglio</a> <a
-							href="PrepareModificaMunicipioServlet?idMunicipio=${municipioItem.id }"
-							class="btn btn-info">Modifica</a></td>
+						<td>
+
+						<a href="GetMunicipioServlet?idMunicipio=${municipioItem.id }"
+							class="btn btn-info">Dettaglio</a> 
+							<a href="PrepareUpdateMunicipioServlet?idMunicipio=${municipioItem.id }"
+							class="btn btn-info">Modifica</a>
+							<a href="PrepareDeleteMunicipioServlet?idMunicipio=${municipioItem.id }"
+							class="btn btn-info">Elimina</a>
+  						</td>
 					</tr>
 				</c:forEach>
 
